@@ -23,8 +23,8 @@ element.addEventListener("mousemove", function (e) {
 
 const tweener = new Tweener();
 // chart.cubes[2].scale equals { x: 1, y: 1, z: 1 }
-tweener.fromTo(chart.cubes[2].scale, { y: 0 }, { y: 1 }, 2000, 2000);
-tweener.fromTo(chart.cubes[2].scale, { y: 1 }, { y: .5 }, 2000, 5000);
+tweener.fromTo(chart.cubes[2].scale, { y: 0 }, null, 2000, 2000);
+tweener.fromTo(chart.cubes[2].scale, null, { y: .5 }, 2000, 5000);
 
 function loop() {
 	tweener.update();

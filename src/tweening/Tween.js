@@ -3,7 +3,7 @@ import {numeric} from "./Interpolation";
 
 export default class Tween {
 
-	constructor(target, fromProps, toProps, easing = linear) {
+	constructor(target, fromProps = null, toProps = null, easing = linear) {
 		this._target = target;
 		this._fromProps = fromProps;
 		this._toProps = toProps;
@@ -24,6 +24,15 @@ export default class Tween {
 	}
 
 	init() {
+		if (null === this._fromProps && null === this._toProps) { // nothing to tween
+			this._updaters = [];
+			return;
+		} else if (null === this._fromProps) {
+			this._fromProps = readProps(this._target, Object.keys(this._toProps));
+		} else if (null === this._toProps) {
+			this._toProps = readProps(this._target, Object.keys(this._fromProps));
+		}
+
 		// first we get all unique keys in _fromProps and _toProps
 		const propKeys = [... new Set(Object.keys(this._fromProps).concat(Object.keys(this._toProps)))];
 
@@ -48,4 +57,11 @@ export default class Tween {
 		}, []);
 	}
 
+}
+
+function readProps(target, keys) {
+	return keys.reduce((props, key) => {
+		props[key] = target[key];
+		return props;
+	}, {});
 }
