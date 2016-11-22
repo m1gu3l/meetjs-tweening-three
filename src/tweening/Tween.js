@@ -44,6 +44,10 @@ export default class Tween {
 
 				if ("number" === typeof from && "number" === typeof to) { // we have interpolator builder for number type
 					interpolator = numeric(from, to);
+				} else if ("string" === typeof from && "number" === typeof to) {
+					interpolator = numeric(parseFloat(from) + to, to);
+				} else if ("number" === typeof from && "string" === typeof to) {
+					interpolator = numeric(from, parseFloat(to) + from);
 				}
 
 				if ("function" === typeof interpolator) { // if there is no interpolator don't add updater

@@ -23,8 +23,8 @@ element.addEventListener("mousemove", function (e) {
 
 const tweener = new Tweener();
 // chart.cubes[2].scale equals { x: 1, y: 1, z: 1 }
-tweener.allFrom(chart.cubes.map(cube => cube.scale), { y: 0 }, 1000, 1000, 100, "sineOut");
-tweener.allFrom(chart.cubes.map(cube => cube.position), { y: -100 }, 2000, 1000, 100, "quadOut");
+tweener.allFrom(chart.cubes.map(cube => cube.position), { y: "+50" }, 2000, 1000, 100, "quadOut");
+tweener.allTo(chart.cubes.map(cube => cube.position), { y: "+50" }, 2000, 5000, 100, "quadOut");
 
 function loop() {
 	tweener.update();
