@@ -1,0 +1,33 @@
+{
+  "name": "meetjs-tweening-three",
+  "version": "1.0.0",
+  "description": "workshop for meetjs lodz 23.11.2016",
+  "main": "src/.js",
+  "scripts": {
+    "start": "webpack-dev-server --inline",
+	"install": "npm run step1",
+	"step1": "git checkout step1",
+	"step2": "git checkout step2",
+	"step3": "git checkout step3",
+	"step4": "git checkout step4",
+	"step5": "git checkout step5",
+	"step6": "git checkout step6",
+	"step7": "git checkout step7",
+	"step8": "git checkout step8",
+	"step9": "git checkout step9",
+	"finished": "git checkout master"
+  },
+  "author": "Michal Przybys",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m1gu3l/meetjs-tweening-three.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "three": "latest"
+  },
+  "devDependencies": {
+    "webpack": "^2.1.0-beta.27",
+    "webpack-dev-server": "latest"
+  }
+}
