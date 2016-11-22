@@ -1,13 +1,14 @@
 import {linear} from "./Easing";
-import {numeric} from "./Interpolation";
+import Interpolation from "./Interpolation";
 
 export default class Tween {
 
-	constructor(target, fromProps = null, toProps = null, easing = linear) {
+	constructor(target, fromProps = null, toProps = null, easing = linear, interpolation = Interpolation.default) {
 		this._target = target;
 		this._fromProps = fromProps;
 		this._toProps = toProps;
 		this._easing = easing;
+		this._interpolation = interpolation;
 	}
 
 	progress(position) {
@@ -40,15 +41,7 @@ export default class Tween {
 			const to = this._toProps[key];
 
 			if (from !== to) { // we don't want to create updater if values are equal
-				let interpolator;
-
-				if ("number" === typeof from && "number" === typeof to) { // we have interpolator builder for number type
-					interpolator = numeric(from, to);
-				} else if ("string" === typeof from && "number" === typeof to) {
-					interpolator = numeric(parseFloat(from) + to, to);
-				} else if ("number" === typeof from && "string" === typeof to) {
-					interpolator = numeric(from, parseFloat(to) + from);
-				}
+				const interpolator = this._interpolation.findInterpolator(key, from, to);
 
 				if ("function" === typeof interpolator) { // if there is no interpolator don't add updater
 					updaters.push((position) => this._target[key] = interpolator(position));

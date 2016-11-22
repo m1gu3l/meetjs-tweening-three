@@ -1,10 +1,16 @@
 import Tween from "./Tween";
+import Interpolation from "./Interpolation";
 import * as Easing from "./Easing";
 
 export default class Tweener {
 
-	constructor() {
+	constructor(interpolation = Interpolation.default) {
 		this._animations = new Set();
+		this._interpolation = interpolation;
+	}
+
+	get interpolation() {
+		return this._interpolation;
 	}
 
 	allFrom(targets, fromProps, duration = 1000, delay = 0, stagger = 0, easing, immediate = true) {
@@ -28,7 +34,7 @@ export default class Tweener {
 		const startTime = now + delay;
 		const endTime = startTime + duration;
 		const easingFn = "function" === typeof easing ? easing : easing in Easing ? Easing[easing] : undefined;
-		const tween = new Tween(target, fromProps, toProps, easingFn);
+		const tween = new Tween(target, fromProps, toProps, easingFn, this._interpolation);
 		if (immediate) {
 			tween.init();
 			tween.progress(0);
