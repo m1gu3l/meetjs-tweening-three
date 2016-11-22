@@ -20,7 +20,6 @@ export default class Tweener {
 			duration,
 			tween
 		});
-		return this;
 	}
 
 	update() {
