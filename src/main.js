@@ -30,11 +30,19 @@ tweener.interpolation.addInterpolator(
 	1
 );
 
-// chart.cubes[2].scale equals { x: 1, y: 1, z: 1 }
-tweener.allFrom(chart.cubes.map(cube => cube.material), {color: new Color(0x333333)}, 2000, 1000, 100, "elasticInOut");
-tweener.allFrom(chart.cubes.map(cube => cube.position), { y: "-100" }, 2000, 1000, 100, "quadIn");
-tweener.allTo(chart.cubes.map(cube => cube.position), { y: "-100" }, 2000, 5000, 100, "quadOut");
-tweener.allTo(chart.cubes.map(cube => cube.material), {color: new Color(0x333333)}, 2000, 5000, 100, "elasticInOut");
+tweener.from(chart.fog, { far: 0 }, 3000, 1000, "quadOut");
+tweener.from(chart.pointLight, { y: "-1000" }, 3000, 1000, "quadOut");
+
+tweener.allFrom(chart.cubes.map(cube => cube.position), { y: "-100" }, 2000, 1000, 100, "elasticOut");
+tweener.allFrom(chart.cubes.map(cube => cube.material), {color: new Color(0x333333)}, 2000, 2000, 100, "quadOut");
+
+tweener.allTo(chart.cubes.map(cube => cube.material), {color: new Color(0x333333)}, 2000, 5000, 100, "quadIn");
+tweener.allTo(chart.cubes.map(cube => cube.position), { y: "-100" }, 2000, 6000, 100, "elasticIn");
+
+tweener.to(chart.ambientLight, { intensity: 0 }, 1000, 7000, "quadIn");
+tweener.to(chart.logo.position, { z: "200", y: "-25" }, 1000, 7000, "quadIn");
+tweener.to(chart.pointLight, { intensity : "+2" }, 3000, 10000, "quadIn");
+tweener.to(chart.pointLight.position, { y: "-1000" }, 3000, 12000, "quadIn");
 
 function loop() {
 	tweener.update();
