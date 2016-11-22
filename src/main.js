@@ -23,9 +23,9 @@ element.addEventListener("mousemove", function (e) {
 
 const tweener = new Tweener();
 // chart.cubes[2].scale equals { x: 1, y: 1, z: 1 }
-tweener.from(chart.cubes[2].scale, { y: 0 }, 2000, 1000);
-tweener.to(chart.cubes[2].scale, { y: .5 }, 2000, 4000);
-tweener.to(chart.cubes[2].scale, { y: 1 }, 1000, 7000);
+tweener.from(chart.cubes[2].scale, { y: 0 }, 2000, 1000, "quadIn");
+tweener.to(chart.cubes[2].scale, { y: .5 }, 2000, 4000, "sineOut");
+tweener.to(chart.cubes[2].scale, { y: 1 }, 1000, 7000, "elasticInOut");
 
 function loop() {
 	tweener.update();

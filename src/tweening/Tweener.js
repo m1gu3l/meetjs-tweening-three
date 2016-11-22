@@ -1,4 +1,5 @@
 import Tween from "./Tween";
+import * as Easing from "./Easing";
 
 export default class Tweener {
 
@@ -18,7 +19,8 @@ export default class Tweener {
 		const now = Date.now();
 		const startTime = now + delay;
 		const endTime = startTime + duration;
-		const tween = new Tween(target, fromProps, toProps, easing);
+		const easingFn = "function" === typeof easing ? easing : easing in Easing ? Easing[easing] : undefined;
+		const tween = new Tween(target, fromProps, toProps, easingFn);
 		if (immediate) {
 			tween.init();
 			tween.progress(0);
