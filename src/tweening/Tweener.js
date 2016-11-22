@@ -7,6 +7,14 @@ export default class Tweener {
 		this._animations = new Set();
 	}
 
+	allFrom(targets, fromProps, duration = 1000, delay = 0, stagger = 0, easing, immediate = true) {
+		targets.forEach((target, index) => this.from(target, fromProps, duration, delay + stagger * index, easing, immediate));
+	}
+
+	allTo(targets, toProps, duration = 1000, delay = 0, stagger = 0, easing, immediate = false) {
+		targets.forEach((target, index) => this.to(target, toProps, duration, delay + stagger * index, easing, immediate));
+	}
+
 	from(target, fromProps, duration = 1000, delay = 0, easing, immediate = true) {
 		this.fromTo(target, fromProps, null, duration, delay, easing, immediate);
 	}
@@ -42,7 +50,6 @@ export default class Tweener {
 		for (let animation of this._animations) {
 
 			if (animation.endTime <= now) { // remove animations that are finished
-				console.log(animation, "has finished");
 				animation.tween.progress(1); // make sure tween is finished properly
 				this._animations.delete(animation);
 			} else if (animation.startTime <= now) { // skip animations that should start in the future
@@ -52,7 +59,6 @@ export default class Tweener {
 					}
 					animation.tween.progress(0); // make sure tween is started properly
 					animation.active = true;
-					console.log(animation, "has started");
 				}
 				const elapsed = (now - animation.startTime);
 				const position = elapsed / animation.duration;
