@@ -31,10 +31,10 @@ tweener.interpolation.addInterpolator(
 );
 
 // chart.cubes[2].scale equals { x: 1, y: 1, z: 1 }
-tweener.allFrom(chart.cubes.map(cube => cube.material), {color: new Color(0x333333)}, 2000, 1000, 100, "elasticInOut");
-tweener.allFrom(chart.cubes.map(cube => cube.position), { y: "-100" }, 2000, 1000, 100, "quadIn");
-tweener.allTo(chart.cubes.map(cube => cube.position), { y: "-100" }, 2000, 5000, 100, "quadOut");
-tweener.allTo(chart.cubes.map(cube => cube.material), {color: new Color(0x333333)}, 2000, 5000, 100, "elasticInOut");
+tweener.allFrom(chart.cubes.map(cube => cube.material), {color: new Color(0x333333)}, 2000, 1000, 100, "quadIn");
+tweener.allFrom(chart.cubes.map(cube => cube.position), { y: "-100" }, 2000, 1000, 100, "elasticInOut");
+tweener.allTo(chart.cubes.map(cube => cube.position), { y: "-100" }, 2000, 5000, 100, "elasticInOut");
+tweener.allTo(chart.cubes.map(cube => cube.material), {color: new Color(0x333333)}, 2000, 5000, 100, "quadOut");
 
 function loop() {
 	tweener.update();
