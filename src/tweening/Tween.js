@@ -8,8 +8,6 @@ export default class Tween {
 		this._fromProps = fromProps;
 		this._toProps = toProps;
 		this._easing = easing;
-
-		this.init();
 	}
 
 	progress(position) {
